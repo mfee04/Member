@@ -1,0 +1,44 @@
+.loading {
+    background: #00000040 no-repeat center 50%;
+    z-index: 9999;
+    height: 100vh;
+}
+.warn {
+    margin-left: 1rem;
+    width: 30%;
+    height: 50vh;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 8px;
+    background-color: #e6a33c;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.login{
+    margin: 0.5rem 1rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
+.login-title {
+    padding-top: 1rem;
+    width: 100%;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1rem;
+}
+input{
+    margin-bottom:0.5rem;
+}
+/* for tab */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color:#2d333c;
+    /* color: white; */
+}
+.nav-pills a{
+    color: #000;
+}

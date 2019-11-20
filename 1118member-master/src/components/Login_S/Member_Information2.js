@@ -52,7 +52,7 @@ class Member_Information extends Component {
                             </Form.Group>
 
                             {/* 性別 */}
-                            <fieldset>
+                            {/* <fieldset>
                                 <Form.Group as={Row}>
                                     <Form.Label as="legend" column sm={2}>
                                         性別
@@ -73,7 +73,7 @@ class Member_Information extends Component {
 
                                     </Col>
                                 </Form.Group>
-                            </fieldset>
+                            </fieldset> */}
 
                             {/* 身分證字號 */}
                             <Form.Group as={Row} controlId="formGridAddress1">

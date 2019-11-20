@@ -128,9 +128,17 @@ class Navigation_Navber_Home extends React.Component {
                   </NavLink>
                                         </li>
                                     ) : (
-                                            ''
+                                            <li className="nav-item nav-item_li">
+                                                <NavLink
+                                                    activeClassName="active"
+                                                    className="nav-link"
+                                                    to="/Login_register"
+                                                >
+                                                    登入/註冊
+                  </NavLink>
+                                            </li>
                                         )}
-                                    {this.state.isAuth ? (
+                                    {/* {this.state.isAuth ? (
                                         ''
                                     ) : (
                                             <li className="nav-item nav-item_li">
@@ -142,7 +150,7 @@ class Navigation_Navber_Home extends React.Component {
                                                     登入/註冊
                   </NavLink>
                                             </li>
-                                        )}
+                                        )} */}
                                 </button>
                             </ul>
                         </div>
@@ -157,13 +165,42 @@ class Navigation_Navber_Home extends React.Component {
                         <Route exact path="/latest_events" component={latest_events} />{/* 最新活動 */}
                         <Route exact path="/New_knowledge_of_bartending" component={New_knowledge_of_bartending} />{/* 調酒新知 */}
                         <Route exact path="/about_us" component={about_us} />{/* 關於我們 */}
-                        <Route exact path="/Login_register" component={Login_register} />{/* 登入/註冊 */}
+                        {/* <Route exact path="/Login_register" component={Login_register} /> */}
+                        {/* 登入/註冊 */}
                         <Route exact path="/Shoping" component={Shoping} />
                         {/*  */}
 
-                        <Route exact path="/Member_Information" component={Member_Information} />{/* 會員資料 */}
-                        <Route exact path="/Member_Register" component={Member_Register} />{/* 註冊頁面 */}
-                        
+                        {/* <Route exact path="/Member_Information" component={Member_Information} /> */}
+                        {/* 會員資料 */}
+                        {/* <Route exact path="/Member_Register" component={Member_Register} /> */}
+                        {/* 註冊頁面 */}
+
+                        <Route
+                            path="/Login_register"
+                            render={props => (
+                                <Login_register
+                                    authenticate={this.authenticate}
+                                    isAuth={this.state.isAuth}
+                                    {...props}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/Member_Register"
+                            render={props => (
+                                <Member_Register
+                                    signout={this.signout}
+                                    isAuth={this.state.isAuth}
+                                    {...props}
+                                />
+                            )}
+                        />
+                        <ProtectedRoute
+                            path="/Member_Information"
+                            component={Member_Information}
+                            isAuth={this.state.isAuth}
+                        />
+
                     </Switch>
                 </>
             </Router>

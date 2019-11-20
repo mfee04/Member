@@ -14,6 +14,9 @@ class Login_Page extends React.Component {
     // }
     constructor(props) {
       super(props)
+      console.log(props)
+   // console.log("location:" + JSON.stringify(props.location))
+
       // 這個狀態只是決定要不要重新導向
       this.state = {
         users: [],
@@ -24,6 +27,7 @@ class Login_Page extends React.Component {
       }
     }
     getUsersAndLogin = () => {
+      console.log('click');
       // const url = 'http://localhost:5555/users'
       const url = 'http://localhost:8000/users'
       this.requestToServer(url, 'GET', {}, this.login)
@@ -78,8 +82,8 @@ class Login_Page extends React.Component {
         alert('密碼為必填！')
         return
       }
-      console.log(this.state)
-      console.log(typeof this.state.users)
+      // console.log(this.state)
+      // console.log(typeof this.state.users)
   
       // 因為node express呈現的資料格式是users包users內的資料,故需要多包一層users ex: this.state.users.user
       // const userFindDataIndex = this.state.users.users.findIndex(
@@ -93,32 +97,44 @@ class Login_Page extends React.Component {
         return
       }
   
+      //如果索引值找到的密碼!==現在輸入的密碼
       if (
         // this.state.users.users[userFindDataIndex].password !== this.state.password
         this.state.users[userFindDataIndex].password !== this.state.password
       ) {
         alert('密碼錯誤！')
         return
+      }else{
+        const sid=this.state.users[userFindDataIndex].member_sid
+        localStorage.setItem('member_sid',sid)
+        console.log('click2');
+
       }
+     
   
       this.props.authenticate(() => {
         this.setState({ redirectToReferrer: true })
       })
     }
+    
   
     // 可控元件通用
     handleChange = event => {
       this.setState({
         // 物件屬性由計算得來
-        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value
       })
+      
     }
     render() {
-    //   let { from } = this.props.location.state || { from: { pathname: '/' } }
-    // let { redirectToReferrer } = this.state
+     let { from } = this.props.location.state || { from: { pathname: '/' } }
+     //console.log('from:' + JSON.stringify(from))
+      // let { from } = { from: { pathname: '/Member_Information' } }
+    //  this.from =  { pathname: '/Member_Information' } ;
+   let { redirectToReferrer } = this.state
 
-    // // 作重新導向，回到上一頁(如果有記錄的話)，或是首頁(如果沒記錄的話)
-    // if (redirectToReferrer) return <Redirect to={from} />
+    // 作重新導向，回到上一頁(如果有記錄的話)，或是首頁(如果沒記錄的話)
+    if (redirectToReferrer) return <Redirect to={from} />
         return (
             
             <>
@@ -146,7 +162,7 @@ class Login_Page extends React.Component {
                          required="required" 
                          autofocus="autofocus"
                          className="line-style inputCell"
-                         value={this .state.username}
+                         value={this.state.username}
                          name="username"
                          onChange={this.handleChange}  />
                         </div>
